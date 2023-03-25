@@ -1,0 +1,6 @@
+SELECT cli.ID, cli.Nombre, ci.Apellido, SUM(vent.Importe) AS Total_compras
+FROM Clientes cli
+INNER JOIN Ventas vent ON cli.ID = vent.Id_cliente
+WHERE vent.Fecha >= DATEADD(month, -12, GETDATE())
+GROUP BY cli.ID, cli.Nombre, cli.Apellido
+HAVING SUM(vent.Importe) > 100000;
